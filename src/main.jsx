@@ -3,7 +3,8 @@ import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles"; // Import createTheme
 import router from "./router";
-
+import { Provider } from "react-redux";
+import store from "./redux/store"
 // Create a theme instance
 const theme = createTheme({
   // You can customize your theme here. For example:
@@ -18,7 +19,11 @@ const theme = createTheme({
 });
 
 createRoot(document.getElementById("root")).render(
+
   <ThemeProvider theme={theme}> 
-    <RouterProvider router={router} />
+  <Provider store={store}>
+  <RouterProvider router={router} />
+  </Provider>
+
   </ThemeProvider>
 );

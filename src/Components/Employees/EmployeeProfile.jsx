@@ -1,5 +1,4 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 import { FaUserTie, FaBuilding, FaClock, FaEnvelope, FaPhone } from 'react-icons/fa';
 const employees = [
