@@ -17,10 +17,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <LoginForm />, // Public route for login
   },
-  // {
-  //   path: "/signup",
-  //   element: <SignUpForm />,
-  // },
+  {
+    path: "/signup",
+    element: <SignUpForm />,
+  },
   { path: "/profilepassword", element: <ProfilePasswordUpdate /> },
   { path: "/mark-attendance", element: <MarkAttendance /> },
   { path: "/emp-profile", element: <EmployeeProfile /> },

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../../redux/slices/usersApiSlice";
 
 const LoginForm = () => {
   const [loginId, setLoginId] = useState("");
@@ -9,6 +10,8 @@ const LoginForm = () => {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
+
+  const [login] = useLoginMutation();
   const validate = () => {
     const newErrors = {};
     if (!loginId) newErrors.loginId = "Login ID is required";
@@ -17,15 +20,26 @@ const LoginForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async  (e) => {
     e.preventDefault();
-    if (validate()) {
       // Assuming login is successful, store token in localStorage
-      localStorage.setItem("authToken", "dummy_token_value");
+      // localStorage.setItem("authToken", "dummy_token_value");
 
       // Navigate to the dashboard after login
-      navigate("/dashboard");
-    }
+      // navigate("/dashboard");
+
+      try {
+
+     const response=  await  login ({email:loginId ,password}).unwrap();
+     console.log(response.success)
+     if(response.success === true){
+      console.log("working")
+      localStorage.setItem("authToken", response.accessToken);
+     }
+      } catch (error) {
+        console.log(error)
+      }
+  
   };
 
   return (
